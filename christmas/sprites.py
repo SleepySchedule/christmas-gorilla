@@ -68,28 +68,24 @@ class Snowman(Sprite):
 
 
 class Snowball(Sprite):
-    def update(self):
-        # if no collision
-        self._pos += self._speed
+    def __init__(self) -> None:
+        self.x0 = 0
+        self.y0 = 400
+        self.gravity = 9.81
+        self.angle = 70
+        self.velocity = 80
+        self.x = 0
+        self.y = 0
 
-    def draw(self, surface: pygame.Surface):
-        pygame.draw.circle(surface, (255,255,255), (self._pos), 5)
+        vx = self.velocity * math.cos(math.radians(self.angle))
+        vy = self.velocity * math.sin(math.radians(self.angle))
+        self.t = 0
 
-
-class Target(Sprite):
-    def __init__(self, pos: pygame.Vector2, speed: pygame.Vector2, direction: str):
-        self._pos = pos
-        self._speed = speed
-        self._radius = 20
-        if direction == "left":
-            self._speed *= -1
-
-    def update(self):
-        # if no collision
-        if self._pos[0] < self._radius or self._pos[0] > 1280 - self._radius:
-            self._speed *= -1
-        
-        self._pos += self._speed
-
-    def draw(self, surface):
-        pygame.draw.circle(surface, (255,0,0), (self._pos), self._radius)
+    def update(self) -> None:
+        self.t += 0.2
+        self.x = self.x0 + self.vx*self.t
+        self.y = self.y0 - (self.vy*self.t - 0.5*self.gravity*self.t**2)
+            
+    def draw(self, surface: pygame.Surface) -> None:
+        surface.fill((255, 255, 255))
+        pygame.draw.circle(surface, (0, 0, 255), (self.x, self.y), 30)
