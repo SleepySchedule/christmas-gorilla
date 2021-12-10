@@ -14,7 +14,7 @@ class PlayView(BaseView):
         self.font = pygame.font.SysFont("Arial", 30)
 
         snowman_pos = pygame.Vector2((1000, 500))
-        self.snowman = Snowman(snowman_pos)
+        self.player_1 = Snowman(snowman_pos)
         self.snowballs: List[Snowball]=[]
         self.targets: List[Target]=[]
 
@@ -36,15 +36,15 @@ class PlayView(BaseView):
             if event.type == MOUSEBUTTONDOWN:
                 mouse_loc = event.pos
                 mouse_loc = pygame.Vector2(mouse_loc)
-                self.snowballs.append(self.snowman.throw_snowball(mouse_loc))
+                self.snowballs.append(self.player_1.throw_snowball(mouse_loc))
             elif event.type == KEYDOWN:
                 if event.key == K_p:
                     Game.set_current_view(PauseView(self))
 
 
     def update(self) -> None:
-        keys_pressed = pygame.key.get_pressed()
-        self.snowman.update(keys_pressed)
+        # keys_pressed = pygame.key.get_pressed()
+        # self.snowman.update(keys_pressed)
 
         for snowball in self.snowballs:
             snowball.update()
@@ -56,7 +56,7 @@ class PlayView(BaseView):
     def draw(self, surface: pygame.Surface) -> None:
         surface.fill((200,200,200))
 
-        self.snowman.draw(surface)
+        self.player_1.draw(surface)
 
         for snowball in self.snowballs:
             snowball.draw(surface)

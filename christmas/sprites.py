@@ -19,20 +19,12 @@ class Sprite:
 
 
 class Snowman(Sprite):
-    def update(self, keys_pressed: Sequence[bool]):
-        if keys_pressed:
-            # if keys_pressed[K_w]:
-            #     self._pos[1] -= 5
-            if keys_pressed[K_a]:
-                self._pos[0] -= 5
-            # if keys_pressed[K_s]:
-            #     self._pos[1] += 5
-            if keys_pressed[K_d]:
-                self._pos[0] += 5 
+    def update(self):
+        pass
 
     def draw(self, surface: pygame.Surface):
         # body
-        pygame.draw.circle(surface, (255,255,255), (self._pos[0],self._pos[1]), 12)
+        pygame.draw.circle(surface, (255,255,255), (self._pos), 12)
         pygame.draw.circle(surface, (255,255,255), (self._pos[0],self._pos[1]+25), 20)
         pygame.draw.circle(surface, (255,255,255), (self._pos[0],self._pos[1]+55), 28)
         
@@ -70,6 +62,9 @@ class Snowman(Sprite):
 
     def set_pos(self, pos: Tuple[int, int]):
         self._pos = pos
+   
+    def get_hitbox(self):
+        pass
 
 
 class Snowball(Sprite):
