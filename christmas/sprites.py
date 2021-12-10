@@ -86,9 +86,6 @@ class Snowball(Sprite):
         vy = self.velocity * math.sin(math.radians(self.angle))
         self.t = 0
 
-    def event_loop(self) -> None:
-        pass
-
     def update(self) -> None:
         self.t += 0.2
         self.x = self.x0 + self.vx*self.t
