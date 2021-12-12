@@ -83,7 +83,7 @@ class PlayView(BaseView):
                 self.existing_fireball = False
                 
                 for team in self.teams:
-                    if not player in team.get_players():
+                    if player not in team.get_players():
                         continue
                     
                     team.remove_player(player)

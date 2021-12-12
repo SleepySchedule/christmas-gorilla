@@ -30,8 +30,8 @@ class Snowman(Sprite):
         return self._pos
 
     def get_rect(self) -> pygame.Rect:
-        """Gets the rectangular hitbox of the snowman."""
-        return self._snowman.get_rect(left=self._pos[0], top=self._pos[1])
+        """Gets the rectangular hitbox of the snowman (cutting off the arms)."""
+        return self._snowman.get_rect(left=self._pos[0]+35, top=self._pos[1], width=35)
 
     def get_team(self) -> str:
         """Gets the team name of the snowman."""
@@ -41,7 +41,7 @@ class Snowman(Sprite):
 class Fireball(Sprite):
     def __init__(self, player: Snowman) -> None:
         self._fireball = pygame.image.load("images/fireball.png")
-        self._fireball = pygame.transform.scale(self._fireball, (50,60))
+        self._fireball = pygame.transform.scale(self._fireball, (25,30))
         self.gravity = 9.81
         self._player = player
         self._angle = 0
