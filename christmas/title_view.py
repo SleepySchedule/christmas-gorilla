@@ -9,7 +9,7 @@ from christmas.play_view import PlayView
 
 
 class TitleView(BaseView):
-    def __init__(self):
+    def __init__(self) -> None:
         title_font = pygame.font.SysFont("Arial", 40)
         self.title_text = title_font.render("Gorillas: Christmas Edition", True, (255, 255, 255))
 

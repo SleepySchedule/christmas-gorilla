@@ -7,13 +7,13 @@ from christmas.my_game import MyGame
 import pygame
 
 class PauseView(BaseView):
-    def __init__(self, parent: BaseView):
+    def __init__(self, parent: BaseView) -> None:
         self._parent = parent
         self._font = pygame.font.SysFont("Calibri", 80)
         self._text = self._font.render("PAUSED", True, (0,0,0))
 
 
-    def event_loop(self, events: List[pygame.event.Event]):
+    def event_loop(self, events: List[pygame.event.Event]) -> None:
         for event in events:
             if event.type == MOUSEBUTTONDOWN:
                 MyGame.set_current_view(self._parent)
@@ -22,11 +22,11 @@ class PauseView(BaseView):
                     MyGame.set_current_view(self._parent)
 
 
-    def update(self):
+    def update(self) -> None:
         pass
 
 
-    def draw(self, surface: pygame.Surface):
+    def draw(self, surface: pygame.Surface) -> None:
         self.get_parent().draw(surface)
         overlay = pygame.Surface(surface.get_size(), pygame.SRCALPHA)
         overlay.fill((0,0,0,150))
@@ -38,9 +38,9 @@ class PauseView(BaseView):
         surface.blit(self.get_text(), text_rect.topleft)
 
     
-    def get_text(self):
+    def get_text(self) -> pygame.Surface:
         return self._text
 
     
-    def get_parent(self):
+    def get_parent(self) -> BaseView:
         return self._parent

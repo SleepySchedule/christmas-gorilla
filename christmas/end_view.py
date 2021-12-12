@@ -9,7 +9,7 @@ from christmas.my_game import MyGame
 
 
 class EndView(BaseView):
-    def __init__(self, winning_team: str):
+    def __init__(self, winning_team: str) -> None:
         self.winning_team = winning_team
 
         self.font = pygame.font.SysFont("Calibri", 40)

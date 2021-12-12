@@ -13,16 +13,16 @@ class Sprite(ABC):
 
 
 class Snowman(Sprite):
-    def __init__(self, pos: Tuple[int, int], team: str):
+    def __init__(self, pos: Tuple[int, int], team: str) -> None:
         self._snowman = pygame.image.load("images/snowman.png")
         self._snowman = pygame.transform.scale(self._snowman, (100, 100))
         self._pos = pos
         self._team = team
 
-    def update(self):
+    def update(self) -> None:
         pass
 
-    def draw(self, surface: pygame.Surface):
+    def draw(self, surface: pygame.Surface) -> None:
         surface.blit(self._snowman, self._pos)
    
     def get_pos(self) -> Tuple[int, int]:
