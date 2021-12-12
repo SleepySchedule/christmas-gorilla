@@ -1,7 +1,7 @@
 from typing import Dict, List, Tuple
 from abc import ABC, abstractmethod
-import pygame
-import math
+
+import pygame, math
 
 
 class Sprite(ABC):
@@ -26,12 +26,15 @@ class Snowman(Sprite):
         surface.blit(self._snowman, self._pos)
    
     def get_pos(self) -> Tuple[int, int]:
+        """Gets the position of the snowman (from the top left corner)."""
         return self._pos
 
     def get_rect(self) -> pygame.Rect:
+        """Gets the rectangular hitbox of the snowman."""
         return self._snowman.get_rect(left=self._pos[0], top=self._pos[1])
 
     def get_team(self) -> str:
+        """Gets the team name of the snowman."""
         return self._team
 
 
@@ -66,42 +69,56 @@ class Fireball(Sprite):
         """Checks if fireball should be killed.
         
         Returns:
-            True if fireball is off bottom of screen, false otherwise.
+            True if fireball is off bottom of the screen, false otherwise.
         """
+
         if self.y > 720:
             dead = True
         else:
             dead = False
+
         return dead
 
-    def collide(self, teams: List[Dict[str, List[Snowman]]]) -> Snowman:
+    from christmas.team import Team
+    def collide(self, teams: List[Team]) -> Snowman:
         """Checks if the fireball has hit an enemy player.
         
         Args:
-            teams: list of teams that have team name and list of players (Snowman class).
+            teams: The team class that holds the name and list of players.
         
         Returns:
             The enemy player if the fireball has hit them, nothing otherwise.
         """
 
         for team in teams:
-            if team['team'] != self._player.get_team():
+            if team.get_name() == self.get_player().get_team():
                 continue
             
-            for player in team['players']:
+            for player in team.get_players():
                 if self.get_rect().colliderect(player.get_rect()):
                     return player
         
         return None
 
     def get_rect(self) -> pygame.Rect:
+        """Gets the rectangular hitbox of the fireball."""
         return self._fireball.get_rect(left=self.x, top=self.y)
 
     def get_player(self) -> Snowman:
+        """Gets the player that threw the fireball."""
         return self._player
 
     def set_velocity(self, distance: float) -> None:
+        """Sets the velocity the fireball will move at.
+        
+        Args:
+            distance: the player position subtracted from the mouse position.
+        """
         self._velocity = distance//5
 
     def set_angle(self, angle: float) -> None:
+        """Sets the angle the fireball will move at.
+        
+        Args:
+            angle: angle of the player position to mouse position (starting left side going clockwise)."""
         self._angle = angle

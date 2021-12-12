@@ -1,1 +1,1 @@
-# Christmas Gorilla
+# Gorillas: Christmas Edition

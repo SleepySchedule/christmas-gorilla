@@ -11,7 +11,7 @@ from christmas.play_view import PlayView
 class TitleView(BaseView):
     def __init__(self):
         title_font = pygame.font.SysFont("Arial", 40)
-        self.title_text = title_font.render("Title Screen", True, (255, 255, 255))
+        self.title_text = title_font.render("Gorillas: Christmas Edition", True, (255, 255, 255))
 
         self.info_font = pygame.font.SysFont("Arial", 25)
         self.info_text = self.info_font.render("Click to play", True, (175, 175, 175))
@@ -25,9 +25,6 @@ class TitleView(BaseView):
 
     def update(self) -> None:
         pass
-
-    def set_previous_winner(self, score: int) -> None:
-        self.previous_winner = score
 
     def draw(self, surface: pygame.Surface) -> None:
         surface.fill((0, 0, 128))
@@ -49,3 +46,6 @@ class TitleView(BaseView):
             text_rect.center = surf_center
             text_rect.y = surface.get_height() * 0.80
             surface.blit(previous_score_text, (text_rect.topleft))
+
+    def set_previous_winner(self, score: int) -> None:
+        self.previous_winner = score
